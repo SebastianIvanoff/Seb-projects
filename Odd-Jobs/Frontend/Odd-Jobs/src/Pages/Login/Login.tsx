@@ -45,7 +45,13 @@ const Login: React.FC = () => {
       const data = res.data; // Get the response data
 
       // Dispatch the login action to update Redux store with the received token and userId
-      dispatch(login({ token: data.token, userId: data.userId }));
+      dispatch(
+        login({
+          token: data.token,
+          userId: data.userId,
+          userName: data.userName,
+        })
+      );
 
       // Navigate to the homepage upon successful login
       navigate("/");
@@ -64,7 +70,7 @@ const Login: React.FC = () => {
       {/* Form for login */}
       <form className="form-group" onSubmit={handleSubmit}>
         <div className="form-field">
-          <label htmlFor="userNAme" className="form-label">
+          <label htmlFor="userName" className="form-label">
             Username:
           </label>
           <input

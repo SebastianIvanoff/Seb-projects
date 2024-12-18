@@ -86,6 +86,7 @@ exports.loginUser = (req, res) => {
       res.status(200).json({
         token: auth.generateToken(user),
         userId: user._id,
+        userName: user.userName,
       });
     });
   });
