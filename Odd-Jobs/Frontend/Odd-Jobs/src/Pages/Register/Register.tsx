@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface RegisterData {
   userName: string;
@@ -41,18 +41,19 @@ const Register = () => {
 
       navigate("/login");
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-          // Axios-specific error handling
-          setErrorMessage(
-            error.response?.data?.message || "An error occurred during registration."
-          );
-        } else {
-          // Fallback for non-Axios errors
-          setErrorMessage("An unexpected error occurred.");
-        }
-        console.error(error);
+      if (axios.isAxiosError(error)) {
+        // Axios-specific error handling
+        setErrorMessage(
+          error.response?.data?.message ||
+            "An error occurred during registration."
+        );
+      } else {
+        // Fallback for non-Axios errors
+        setErrorMessage("An unexpected error occurred.");
       }
-    };
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -85,7 +86,9 @@ const Register = () => {
               type="password"
               id="password"
               name="password"
+              className="form-control"
               placeholder="Enter your password..."
+              autoComplete="new-password"
               value={RegisterData.password}
               onChange={handleChange}
               required
@@ -97,6 +100,7 @@ const Register = () => {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
+              className="form-control"
               placeholder="Confirm your password..."
               value={RegisterData.confirmPassword}
               onChange={handleChange}
@@ -104,6 +108,7 @@ const Register = () => {
             />
           </div>
           <div className="form-bottom">
+            <Link to={"/login"}>Already have an account</Link>
             <button className="form-btn">Registers</button>
           </div>
         </form>
